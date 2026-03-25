@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Edukasi Phishing - Keamanan Siber</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* WATERMARK KEAMANAN - TIDAK UNTUK PHISHING ASLI */
+        body::before {
+            content: "🔒 DEMO EDUKASI KEAMANAN SIBER | TIDAK UNTUK PHISHING ASLI | HANYA UNTUK TUJUAN PEMBELAJARAN 🔒";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #ff0000;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 999;
+            letter-spacing: 1px;
+        }
+
+        body::after {
+            content: "⚠️ DEMO - JANGAN MASUKKAN DATA ASLI ⚠️";
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            color: #ff0;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 999;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            max-width: 450px;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Peringatan */
+        .warning-header {
+            background: #ffeb3b;
+            color: #856404;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        /* Fake URL Bar */
+        .url-bar {
+            background: #f1f3f4;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 13px;
+        }
+
+        .url-lock {
+            color: #34a853;
+            font-size: 14px;
+        }
+
+        .url-text {
+            background: white;
+            flex: 1;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: #5f6368;
+            font-family: monospace;
+            font-size: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .url-badge {
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+        }
+
+        /* Konten Utama */
+        .content {
+            padding: 30px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #1a73e8;
+            font-weight: 500;
+        }
+
+        .logo p {
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #202124;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+        }
+
+        .btn-login {
+            width: 100%;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #1557b0;
+        }
+
+        .forgot {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .forgot a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /* Demo Alert */
+        .demo-alert {
+            margin-top: 20px;
+            padding: 12px;
+            background: #fce8e6;
+            border-left: 4px solid #d93025;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #d93025;
+        }
+
+        .demo-alert strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Footer Edukasi */
+        .edu-footer {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-top: 1px solid #e8eaed;
+            font-size: 12px;
+            color: #5f6368;
+            text-align: center;
+        }
+
+        .edu-footer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .phishing-tips {
+            background: #e8f0fe;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+        }
+
+        .phishing-tips h4 {
+            color: #1a73e8;
+            margin-bottom: 8px;
+        }
+
+        .phishing-tips ul {
+            padding-left: 20px;
+        }
+
+        .phishing-tips li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- Peringatan Tambahan di Dalam Card -->
+    <div class="warning-header">
+        ⚠️ INI ADALAH DEMO EDUKASI - JANGAN MASUKKAN DATA PRIBADI ASLI ⚠️
+    </div>
+
+    <!-- Fake URL Bar - Meniru URL Palsu -->
+    <div class="url-bar">
+        <span class="url-lock">🔒</span>
+        <span class="url-text">https://accounts-google.com.security-update.verify-login.com</span>
+        <span class="url-badge">Tidak Aman</span>
+    </div>
+
+    <div class="content">
+        <div class="logo">
+            <h1>Google</h1>
+            <p>Masuk ke akun Google Anda</p>
+        </div>
+
+        <!-- Form Demo - Data TIDAK dikirim ke mana pun (hanya untuk demo) -->
+        <form id="demoPhishingForm" onsubmit="return handleDemoSubmit(event)">
+            <div class="input-group">
+                <label>Email atau Nomor Telepon</label>
+                <input type="email" id="demoEmail" placeholder="contoh@gmail.com" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label>Kata Sandi</label>
+                <input type="password" id="demoPassword" placeholder="Kata sandi">
+            </div>
+            <button type="submit" class="btn-login">Berikutnya</button>
+        </form>
+
+        <div class="forgot">
+            <a href="#">Lupa sandi?</a> · <a href="#">Buat akun</a>
+        </div>
+
+        <!-- Alert Demo: Menampilkan apa yang terjadi jika ini adalah phishing asli -->
+        <div class="demo-alert" id="demoAlert" style="display: none;">
+            <strong>🔴 [DEMO EDUKASI] Ini adalah simulasi phishing!</strong>
+            Pada serangan phishing asli, data yang Anda masukkan akan dikirim ke server attacker.
+            <br><br>
+            <strong>Email yang dimasukkan:</strong> <span id="showEmail"></span><br>
+            <strong>Password yang dimasukkan:</strong> <span id="showPass"></span>
+        </div>
+
+        <!-- Tips Keamanan -->
+        <div class="phishing-tips">
+            <h4>🔍 Cara Mendeteksi Phishing:</h4>
+            <ul>
+                <li>Periksa URL dengan teliti - domain palsu sering mirip dengan asli</li>
+                <li>Halaman ini menggunakan URL <strong>accounts-google.com.security...</strong> - BUKAN domain resmi google.com</li>
+                <li>Jangan pernah klik link dari email mencurigakan</li>
+                <li>Aktifkan 2FA (Two Factor Authentication)</li>
+                <li>Gunakan password manager yang otomatis mendeteksi domain palsu</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="edu-footer">
+        🔒 <strong>Demo Edukasi Keamanan Siber</strong> | Tugas Presentasi Anti-Phishing<br>
+        Website ini <strong>TIDAK</strong> menyimpan data apapun. Hanya untuk menunjukkan celah keamanan phishing.
+    </div>
+</div>
+
+<script>
+    function handleDemoSubmit(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('demoEmail').value;
+        const password = document.getElementById('demoPassword').value;
+        
+        if (!email || !password) {
+            alert('[DEMO] Harap isi email dan password untuk melihat simulasi (data tidak akan disimpan)');
+            return false;
+        }
+        
+        // Menampilkan alert demo - menunjukkan bahwa ini adalah simulasi phishing
+        document.getElementById('showEmail').textContent = email;
+        document.getElementById('showPass').textContent = '*'.repeat(password.length) + ' (' + password.length + ' karakter)';
+        document.getElementById('demoAlert').style.display = 'block';
+        
+        // Scroll ke alert
+        document.getElementById('demoAlert').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Log ke console untuk tujuan edukasi
+        console.log('==================== [DEMO PHISHING EDUKASI] ====================');
+        console.log('Pada serangan phishing asli, data berikut akan dicuri:');
+        console.log('Email/Username:', email);
+        console.log('Password:', password);
+        console.log('URL palsu:', window.location.href);
+        console.log('==================== INI HANYA DEMO ====================');
+        console.log('TIPS: Selalu periksa URL sebelum login!');
+        
+        // Reset form setelah demo (opsional)
+        // document.getElementById('demoPhishingForm').reset();
+        
+        return false;
+    }
+    
+    // Tambahan: efek edukasi saat hover di URL bar
+    const urlBar = document.querySelector('.url-text');
+    if (urlBar) {
+        urlBar.addEventListener('mouseenter', () => {
+            urlBar.style.backgroundColor = '#fff3cd';
+            urlBar.style.cursor = 'pointer';
+        });
+        urlBar.addEventListener('mouseleave', () => {
+            urlBar.style.backgroundColor = 'white';
+        });
+        urlBar.addEventListener('click', () => {
+            alert('[EDUKASI] URL ini adalah contoh phishing!\n\nDomain resmi Google adalah https://accounts.google.com\nBukan "accounts-google.com.security-update.verify-login.com"\n\nSelalu periksa domain sebelum memasukkan data pribadi!');
+        });
+    }
+</script>
+
+</body>
+</html>
